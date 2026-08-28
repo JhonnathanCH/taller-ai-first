@@ -1,0 +1,21 @@
+name: Tests
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      # Reads both the uv and the Python version from .tool-versions.
+      - uses: astral-sh/setup-uv@v10
+        with:
+          version-file: .tool-versions
+
+      # --locked fails if uv.lock is out of date; dev group installs by default.
+      - run: uv sync --locked
+
+      - run: uv run pytest tests -q
