@@ -15,4 +15,5 @@ packages = ["src/carrito"]
 [dependency-groups]
 dev = [
     "pytest>=9.1.1",
+    "pytest-bdd>=8.1.0",
 ]
